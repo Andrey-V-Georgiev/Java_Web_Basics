@@ -8,5 +8,7 @@ public interface GenericRepository<E, K> {
 
     E findByID(K id);
 
+    E findByName(K name);
+
     List<E> findAll();
 }

@@ -1,8 +1,8 @@
 package web.servlets;
 
-import domain.entities.ProductEntity;
-import domain.entities.Type;
+import domain.models.service.ProductServiceModel;
 import repository.ProductRepository;
+import service.ProductService;
 import util.HtmlFileReader;
 
 import javax.inject.Inject;
@@ -19,12 +19,12 @@ import static paths.Paths.CREATE_PRODUCT_VIEW_FILE_PATH;
 public class ProductCreateServlet extends HttpServlet {
 
     private final HtmlFileReader htmlFieReader;
-    private final ProductRepository productRepository;
+    private final ProductService productService;
 
     @Inject
-    public ProductCreateServlet(HtmlFileReader htmlFieReader, ProductRepository productRepository) {
+    public ProductCreateServlet(HtmlFileReader htmlFieReader, ProductRepository productRepository, ProductService productService) {
         this.htmlFieReader = htmlFieReader;
-        this.productRepository = productRepository;
+        this.productService = productService;
     }
 
     @Override
@@ -35,11 +35,17 @@ public class ProductCreateServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductEntity productEntity = new ProductEntity();
-        productEntity.setName("Pesho");
-        productEntity.setDescription("Megazoba");
-        productEntity.setType(Type.Cosmetic);
-        this.productRepository.save(productEntity);
-        resp.sendRedirect("/");
+        String name = req.getParameter("name");
+        String description = req.getParameter("description");
+        String type = req.getParameter("type");
+
+        ProductServiceModel productServiceModel = new ProductServiceModel();
+        productServiceModel.setName(name);
+        productServiceModel.setDescription(description);
+        productServiceModel.setType(type);
+
+        this.productService.saveProduct(productServiceModel);
+
+        resp.sendRedirect(String.format("/products/details?name=%s", req.getParameter("name")));
     }
 }

@@ -1,21 +1,23 @@
-package domain.entities;
+package domain.models.service;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+public class ProductServiceModel {
 
-@Entity
-@Table(name="products")
-public class ProductEntity extends BaseEntity {
-
+    private String id;
     private String name;
     private String description;
-    private Type type;
+    private String type;
 
-    public ProductEntity() {
+    public ProductServiceModel() {
     }
 
-    @Column(name="name")
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -24,7 +26,6 @@ public class ProductEntity extends BaseEntity {
         this.name = name;
     }
 
-    @Column(name="description")
     public String getDescription() {
         return description;
     }
@@ -33,12 +34,11 @@ public class ProductEntity extends BaseEntity {
         this.description = description;
     }
 
-    @Column(name="type")
-    public Type getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(String type) {
         this.type = type;
     }
 }

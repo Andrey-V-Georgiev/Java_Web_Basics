@@ -1,38 +1,64 @@
 package repository;
 
-import domain.entities.ProductEntity;
-import domain.entities.Type;
+import domain.entities.Product;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
 public class ProductRepositoryImpl implements ProductRepository {
 
-    private final EntityManager em;
+    private final EntityManager entityManager;
 
     public ProductRepositoryImpl() {
-        this.em = Persistence
+        this.entityManager = Persistence
                 .createEntityManagerFactory("chushka_db")
                 .createEntityManager();
     }
 
     @Override
-    public ProductEntity save(ProductEntity productEntity) {
-        this.em.getTransaction().begin();
-        this.em.persist(productEntity);
-        this.em.getTransaction().commit();
-        return productEntity;
+    public Product save(Product product) {
+        this.entityManager.getTransaction().begin();
+        this.entityManager.persist(product);
+        this.entityManager.getTransaction().commit();
+        return product;
     }
 
     @Override
-    public ProductEntity findByID(String id) {
-        return null;
+    public Product findByID(String id) {
+        this.entityManager.getTransaction().begin();
+        Product product = this.entityManager
+                .createQuery("SELECT p FROM Product p WHERE p.id=:id",
+                        Product.class)
+                .setParameter("id", id)
+                .getSingleResult();
+
+        this.entityManager.getTransaction().commit();
+        return product;
     }
 
     @Override
-    public List<ProductEntity> findAll() {
-        return null;
+    public Product findByName(String name) {
+        this.entityManager.getTransaction().begin();
+        Product product = this.entityManager
+                .createQuery("SELECT p FROM Product p WHERE p.name=:name",
+                        Product.class)
+                .setParameter("name", name)
+                .getSingleResult();
+
+        this.entityManager.getTransaction().commit();
+        return product;
+    }
+
+
+    @Override
+    public List<Product> findAll() {
+        this.entityManager.getTransaction().begin();
+        List<Product> allProducts = this.entityManager
+                .createQuery("SELECT p FROM Product p",
+                        Product.class)
+                .getResultList();
+        this.entityManager.getTransaction().commit();
+        return allProducts;
     }
 }

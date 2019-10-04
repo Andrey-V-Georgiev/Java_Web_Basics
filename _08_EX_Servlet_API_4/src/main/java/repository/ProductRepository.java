@@ -1,6 +1,7 @@
 package repository;
 
-import domain.entities.ProductEntity;
+import domain.entities.Product;
 
-public interface ProductRepository extends GenericRepository<ProductEntity, String> {
+public interface ProductRepository extends GenericRepository<Product, String> {
+
 }
