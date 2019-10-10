@@ -1,5 +1,10 @@
 package app.models.binding_models;
 
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class TubeBindingModel {
 
     private String name;
@@ -10,6 +15,9 @@ public class TubeBindingModel {
     public TubeBindingModel() {
     }
 
+    @NotNull
+    @Size(min=2)
+
     public String getName() {
         return name;
     }
@@ -18,6 +26,8 @@ public class TubeBindingModel {
         this.name = name;
     }
 
+    @NotNull
+    @Size(min=2)
     public String getDescription() {
         return description;
     }
@@ -26,6 +36,7 @@ public class TubeBindingModel {
         this.description = description;
     }
 
+    @Pattern(regexp = "https:\\/\\/www\\.youtube\\.com\\/watch\\?v=.+")
     public String getYoutubeLink() {
         return youtubeLink;
     }
@@ -34,6 +45,8 @@ public class TubeBindingModel {
         this.youtubeLink = youtubeLink;
     }
 
+    @NotNull
+    @Size(min=2)
     public String getUploader() {
         return uploader;
     }

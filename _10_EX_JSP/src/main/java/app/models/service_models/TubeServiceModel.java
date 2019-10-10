@@ -1,5 +1,9 @@
 package app.models.service_models;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class TubeServiceModel {
 
     private String name;
@@ -10,6 +14,7 @@ public class TubeServiceModel {
     public TubeServiceModel() {
     }
 
+    @NotNull
     public String getName() {
         return name;
     }
@@ -18,6 +23,7 @@ public class TubeServiceModel {
         this.name = name;
     }
 
+    @NotNull
     public String getDescription() {
         return description;
     }
@@ -26,6 +32,7 @@ public class TubeServiceModel {
         this.description = description;
     }
 
+    @Pattern(regexp = "https:\\/\\/www\\.youtube\\.com\\/watch\\?v=.+")
     public String getYoutubeLink() {
         return youtubeLink;
     }
@@ -34,6 +41,8 @@ public class TubeServiceModel {
         this.youtubeLink = youtubeLink;
     }
 
+    @NotNull
+    @Size(min=2)
     public String getUploader() {
         return uploader;
     }

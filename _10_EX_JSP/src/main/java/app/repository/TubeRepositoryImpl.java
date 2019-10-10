@@ -29,7 +29,8 @@ public class TubeRepositoryImpl implements TubeRepository {
         Tube tube = this.entityManager
                 .createQuery("SELECT t FROM Tube t WHERE t.name=:name", Tube.class)
                 .setParameter("name", name)
-                .getSingleResult();
+                .getResultList()
+                .get(0);
         this.entityManager.getTransaction().commit();
         return tube;
     }

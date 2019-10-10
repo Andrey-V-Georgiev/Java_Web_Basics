@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <c:import url="head.jsp"/>
+    <c:import url="base/head.jsp"/>
     <title>Index</title>
 </head>
 <body>
@@ -31,7 +31,7 @@
         </div>
     <div class="row">
         <div class="col col-md-12 d-flex justify-content-center">
-            <c:import url="footer.jsp"/>
+            <c:import url="base/footer.jsp"/>
         </div>
     </div>
 </div>

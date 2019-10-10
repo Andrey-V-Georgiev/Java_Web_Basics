@@ -37,8 +37,13 @@ public class TubeCreateServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        TubeServiceModel tubeServiceModel = this.modelMapper.map(req.getAttribute("tubeBindingModel"), TubeServiceModel.class);
-        this.tubeService.save(tubeServiceModel);
-        resp.sendRedirect(String.format("/tubes/details?name=%s", tubeServiceModel.getName()));
+        TubeBindingModel tubeBindingModel = (TubeBindingModel) req.getAttribute("tubeBindingModel");
+        if(tubeBindingModel == null){
+            resp.sendRedirect("/tubes/create");
+        } else {
+            TubeServiceModel tubeServiceModel = this.modelMapper.map(tubeBindingModel, TubeServiceModel.class);
+            this.tubeService.save(tubeServiceModel);
+            resp.sendRedirect(String.format("/tubes/details?name=%s", tubeServiceModel.getName()));
+        }
     }
 }

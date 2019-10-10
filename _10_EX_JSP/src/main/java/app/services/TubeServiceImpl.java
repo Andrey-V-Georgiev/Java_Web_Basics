@@ -3,6 +3,7 @@ package app.services;
 import app.models.entities.Tube;
 import app.models.service_models.TubeServiceModel;
 import app.repository.TubeRepository;
+import app.utils.ValidatorUtil;
 import org.modelmapper.ModelMapper;
 
 import javax.inject.Inject;
