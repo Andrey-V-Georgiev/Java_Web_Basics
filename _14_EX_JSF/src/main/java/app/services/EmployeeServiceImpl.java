@@ -6,6 +6,7 @@ import app.repositories.EmployeeRepository;
 import org.modelmapper.ModelMapper;
 
 import javax.inject.Inject;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -44,5 +45,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void removeById(String id) {
         this.employeeRepository.removeById(id);
+    }
+
+    @Override
+    public BigDecimal salariesSum() {
+        return this.employeeRepository.salariesSum();
+    }
+
+    @Override
+    public BigDecimal averageSalary() {
+        return this.employeeRepository.averageSalary();
     }
 }

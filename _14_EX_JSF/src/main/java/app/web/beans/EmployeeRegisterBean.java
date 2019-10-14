@@ -5,9 +5,7 @@ import app.domain.models.service.EmployeeServiceModel;
 import app.services.EmployeeService;
 import org.modelmapper.ModelMapper;
 
-import javax.annotation.ManagedBean;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Produces;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -43,7 +41,7 @@ public class EmployeeRegisterBean  implements Serializable {
 
 
     public void register() throws IOException {
-        System.out.println(employeeRegisterBindingModel);
+        System.out.println();
         this.employeeService.save(this.modelMapper.map(this.employeeRegisterBindingModel, EmployeeServiceModel.class));
 
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();

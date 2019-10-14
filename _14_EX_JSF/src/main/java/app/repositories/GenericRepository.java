@@ -11,4 +11,5 @@ public interface GenericRepository<E, K> {
     E findById(K id);
 
     void removeById(K id);
+
 }

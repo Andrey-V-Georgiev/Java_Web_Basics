@@ -4,6 +4,8 @@ import app.domain.entities.Employee;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 
 
@@ -21,11 +23,11 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     @Override
     public Employee save(Employee employee) {
-        try{
+        try {
             this.entityManager.getTransaction().begin();
             this.entityManager.persist(employee);
             this.entityManager.getTransaction().commit();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("/////////////////////////////////////////////////////////////////////////////////////");
             System.out.println(e);
             System.out.println("/////////////////////////////////////////////////////////////////////////////////////");
@@ -54,6 +56,37 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         this.entityManager.getTransaction().commit();
 
         return employee;
+    }
+
+    @Override
+    public BigDecimal salariesSum() {
+        try {
+            this.entityManager.getTransaction().begin();
+            BigDecimal salariesSum = new BigDecimal(this.entityManager
+                    .createQuery("SELECT SUM(salary) FROM Employee")
+                    .getSingleResult()
+                    .toString());
+            this.entityManager.getTransaction().commit();
+            return salariesSum;
+        } catch (Exception e) {
+            return new BigDecimal("0");
+        }
+
+    }
+
+    @Override
+    public BigDecimal averageSalary() {
+        try {
+            this.entityManager.getTransaction().begin();
+            BigDecimal averageSalary = new BigDecimal(this.entityManager
+                    .createQuery("SELECT AVG(salary) FROM Employee")
+                    .getSingleResult()
+                    .toString());
+            this.entityManager.getTransaction().commit();
+            return averageSalary;
+        } catch (Exception e) {
+            return new BigDecimal("0");
+        }
     }
 
     @Override

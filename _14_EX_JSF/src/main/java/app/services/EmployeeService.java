@@ -2,8 +2,8 @@ package app.services;
 
 import app.domain.models.service.EmployeeServiceModel;
 
+import java.math.BigDecimal;
 import java.util.List;
-import java.util.UUID;
 
 public interface EmployeeService {
 
@@ -14,4 +14,8 @@ public interface EmployeeService {
     EmployeeServiceModel findById(String id);
 
     void removeById(String id);
+
+    BigDecimal salariesSum();
+
+    BigDecimal averageSalary();
 }
